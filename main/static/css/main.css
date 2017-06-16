@@ -1,0 +1,58 @@
+#about-content, #mp-result, #postcode-error, #unconfirmed-email {
+  display: none;
+}
+
+.your-mp>h2 {
+  margin-bottom: 20px;
+}
+
+#postcode-input {
+  max-width: 200px;
+}
+
+#mp-image-container {
+  width: 150px;
+  height: 200px;
+
+  margin-bottom: 20px;
+}
+
+#mp-image {
+  width: 150px;
+  margin-bottom: 5px;
+}
+
+#mp-party {
+  width: 150px;
+}
+
+#party-image {
+  height: 40px;
+  float: left;
+}
+
+#party-text {
+  max-width: 100px;
+  height: 40px;
+  font-size: 11px;
+  margin-left: 5px;
+  clear: left;
+}
+
+#mp-name {
+  text-align: left;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
+#mp-contact-wrap {
+  width: 150px; margin-top: 20px;
+}
+
+#mp-contact-buttons {
+  margin: auto;
+}
+
+#clear-mp {
+  margin: 10px;
+}

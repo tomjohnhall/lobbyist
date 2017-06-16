@@ -1,1 +1,131 @@
-<h1> Hello World! </h1>
+{% load static %}
+<html>
+<head>
+
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.css' %}">
+<!-- Font Awesome -->
+<link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.css' %}">
+<!-- Optional theme -->
+<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+<!-- Social glyphs -->
+<link rel="stylesheet" href="{% static 'bootstrap-social-gh-pages/bootstrap-social.css' %}">
+<!-- Main css -->
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<!-- Viewport meta -->
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<!-- Jquery minified -->
+<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+<!-- Bootstraps js -->
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<!-- Script via django docs for csrf requests -->
+<script src="{% static 'js/ajax.js' %}"></script>
+<!-- general stuff -->
+<script src="{% static 'js/main.js' %}"></script>
+<!-- mp fetcher -->
+<script src="{% static 'js/yourmp.js' %}"></script>
+<!-- parliament schedule -->
+<script src="{% static 'js/upcomingParliament.js' %}"></script>
+
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="navbar-header">
+        <span class="navbar-brand"><a href=""  href="#">Lobbyist</a><span style="font-size: 60%"> - guide your government</span></span>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="intro">
+      <h1> Lobbyist  <span id="title-arrow" class="glyphicon glyphicon-chevron-down" style="font-size:50%;"></span></h1>
+
+      <p id="about-content"> The 2017 UK Generel Election has left UK politics in a state of bewilderment, which means it's more important now than ever that constituents, of any and all party loyalties, are able to lobby their MPs to represent their interests in parliament. Lobbyist is a tool for collaborating on letter writing compaigns, petitions and improving the accessibility of complex acts and bills as they progress.
+    </div>
+    <div class="your-mp">
+      <h2> Your MP <span id="mp-arrow" class="glyphicon glyphicon-chevron-up" style="font-size:50%;"></span></h2>
+      <div id="mp-content">
+      <form method="POST" id="postcode-form">
+        <div class="input-group">
+          <input id="postcode-input" class="form-control" type="text" placeholder="Enter your postcode" name="postcode">
+          <button type="submit" class="btn btn=default" value="submit">Submit</button>
+        </div>
+        {% csrf_token %}
+      </form>
+      <p id="postcode-error"></p>
+      {% if postcode %}
+        <script>
+        var postcode = ' {{postcode}} ';
+        </script>
+      {% endif %}
+      <div id="mp-result">
+        <div class="row">
+          <div class="col-xs-5 col-sm-3">
+            <div id="mp-image-container" class="center-block">
+              <img src="" alt="" id="mp-image" >
+              <div id="mp=party">
+                <img src="" id="party-image">
+                <span id="party-text"></span>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-7 col-sm-4">
+            <h3 id="mp-name"></h3>
+            <p id="mp-constituency"></p>
+            <p id="mp-position"></p>
+            <p><a href="" target="_blank" id="twfy">They Work For You</a></p>
+            <p><a href="" tagret="_blank" id="mp-email" class="mp-mailto"></a></p>
+            <p id="unconfirmed-email"> (email awaiting confirmation) </p>
+            <div class="btn-group" id="mp-contact-buttons">
+              <a href="" target="_blank" class="btn btn-social-icon btn-sm mp-mailto" id="mp-email-icon" style="background-color:#dadada; outliine: 1px solid #cdcdcd">
+                <i class="fa fa-envelope fa-4x" style="vertical-align: middle;" aria-hidden="true"></i>
+              </a>
+              <a href="" target="_blank" class="btn btn-social-icon btn-sm btn-twitter" id="mp-twitter">
+                <span class="fa fa-twitter"></span>
+              </a>
+              <a href="" target="_blank" class="btn btn-social-icon btn-sm btn-facebook" id="mp-facebook">
+                <span class="fa fa-facebook"></span>
+              </a>
+            </div>
+          <button class="btn btn-default" id="clear-mp"> Clear </button>
+          </div>
+          <div class="col-xs-12 col-sm-5" id="mp-votes">
+            <div class="row">
+              <p class="vote">x foted for y</p>
+            </div>
+            <div class="row">
+              <p class="vote">z foted for a</p>
+            </div>
+            <div class="row">
+              <p class="vote">b voted for c</p>
+            </div>
+            <div class="row">
+              <p class="vote">oscar voted for lemur</p>
+            </div>
+          </div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+
+    <div id="upcomingParliament">
+      <h2 id="upcoming-title">Upcoming in Parliament <span id="upcoming-arrow" class="glyphicon glyphicon-chevron-up" style="font-size:50%;"></span></h2>
+      <div id="upcoming-content">
+      </div>
+    </div>
+
+    <nav class="navbar" id="">
+
+    </nav>
+  </div>
+
+    <script>
+
+</script>
+
+  </div>

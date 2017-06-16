@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'herokuapp.com', 'salty-hamlet-46189.herokuapp.com', 'https://salty-hamlet-46189.herokuapp.com/', 'lobbyist.org.uk']
+ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost:8000', 'herokuapp.com', 'salty-hamlet-46189.herokuapp.com', 'lobbyist.org.uk']
 
 
 # Application definition
@@ -126,8 +126,14 @@ USE_TZ = True
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'staticfiles'),
+)
+
 
 # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
