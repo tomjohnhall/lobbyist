@@ -24,8 +24,8 @@
 <script src="{% static 'js/main.js' %}"></script>
 <!-- mp fetcher -->
 <script src="{% static 'js/yourmp.js' %}"></script>
-<!-- parliament schedule -->
-<script src="{% static 'js/upcomingParliament.js' %}"></script>
+<!-- petitions -->
+<script src="{% static 'js/petitions.js' %}"></script>
 
 </head>
 
@@ -40,18 +40,20 @@
 
   <div class="container">
     <div class="intro">
-      <h1> Lobbyist  <span id="title-arrow" class="glyphicon glyphicon-chevron-down" style="font-size:50%;"></span></h1>
+      <h1> Lobbyist  <span id="title-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h1>
 
-      <p id="about-content"> The 2017 UK Generel Election has left UK politics in a state of bewilderment, which means it's more important now than ever that constituents, of any and all party loyalties, are able to lobby their MPs to represent their interests in parliament. Lobbyist is a tool for collaborating on letter writing compaigns, petitions and improving the accessibility of complex acts and bills as they progress.
+      <p id="about-content" class="content"> The 2017 UK Generel Election has left UK politics in a state of bewilderment, which means it's more important now than ever that constituents, of any and all party loyalties, are able to lobby their MPs to represent their interests in parliament. Lobbyist is a tool for collaborating on letter writing compaigns, petitions and improving the accessibility of complex acts and bills as they progress.
     </div>
     <div class="your-mp">
-      <h2> Your MP <span id="mp-arrow" class="glyphicon glyphicon-chevron-up" style="font-size:50%;"></span></h2>
-      <div id="mp-content">
+      <h2> Your MP <span id="mp-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
+      <div id="mp-content" class="content">
       <form method="POST" id="postcode-form">
         <div class="input-group">
           <input id="postcode-input" class="form-control" type="text" placeholder="Enter your postcode" name="postcode">
           <button type="submit" class="btn btn=default" value="submit">Submit</button>
         </div>
+        <i id="mp-loading" class="fa fa-cog fa-spin fa-md fa-fw loading"></i>
+        <span class="sr-only">Loading...</span>
         {% csrf_token %}
       </form>
       <p id="postcode-error"></p>
@@ -91,20 +93,6 @@
             </div>
           <button class="btn btn-default" id="clear-mp"> Clear </button>
           </div>
-          <div class="col-xs-12 col-sm-5" id="mp-votes">
-            <div class="row">
-              <p class="vote">x foted for y</p>
-            </div>
-            <div class="row">
-              <p class="vote">z foted for a</p>
-            </div>
-            <div class="row">
-              <p class="vote">b voted for c</p>
-            </div>
-            <div class="row">
-              <p class="vote">oscar voted for lemur</p>
-            </div>
-          </div>
           </div>
         </div>
 
@@ -114,14 +102,65 @@
     </div>
 
     <div id="upcomingParliament">
-      <h2 id="upcoming-title">Upcoming in Parliament <span id="upcoming-arrow" class="glyphicon glyphicon-chevron-up" style="font-size:50%;"></span></h2>
-      <div id="upcoming-content">
+      <h2 id="upcoming-title">Upcoming in Parliament <span id="upcoming-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
+      <div id="upcoming-content" class="content">
+        {% for event in schedule %}
+          {% ifchanged event.date %}
+            {% if not forloop.first %}
+            </div></div></div>
+            {% endif %}
+            {% if event.date in date %}
+            <div class="date today">
+            {% else %}
+            <div class="date">
+            {% endif %}
+            <h2> {{ event.date }} </h2>
+            <div class="row">
+          {% endifchanged %}
+          {% ifchanged event.house event.date %}
+            {% autoescape on %}
+              {% cycle '' '</div>' %}
+            {% endautoescape %}
+            <div class="col-xs-6">
+            <h3> {{ event.house }} </h3>
+          {% endifchanged %}
+          {% ifchanged event.location event.house event.date %}
+            <h4> {{ event.location }} </h4>
+          {% endifchanged %}
+            {% if 'Adjournment' not in event.title %}
+              {{ event.title | safe }}
+              {% if event.description != 'None' %}
+                {{ event.description | safe }}
+              {% endif %}
+            {% endif %}
+            {% if forloop.last %}
+            <div></div></div>
+            {% endif %}
+        {% endfor %}
+      </div>
+      </div>
       </div>
     </div>
 
-    <nav class="navbar" id="">
+    <div id="consultations">
+      <h2 id="consultations-title">Public Consultations <span id="consultations-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
+        <div id="consultations-content" class="content">
+          {% for c in consultations %}
+          <a href="{{ c.url }}"><h3> {{ c.title }} </h3> </a>
+          <p> {{ c.date|date:'d-m-Y H:i' }} </p>
+          <p> {{ c.summary }} </p>
+        {% endfor %}
+      </div>
+    </div>
 
-    </nav>
+    <div id="petitions">
+      <h2 id="petitions-title">Petitions <span id="petitions-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
+      <div id="petitions-content" class="content">
+        <i id="petitions-loading" class="fa fa-cog fa-spin fa-md fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
   </div>
 
     <script>

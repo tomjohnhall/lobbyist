@@ -22,4 +22,11 @@ $(document).ready(function() {
     expander($(this),$('#upcoming-content'));
   });
 
+  $('#consultations-arrow').click(function () {
+    expander($(this),$('#consultations-content'));
+  });
+
+  $('#petitions-arrow').click(function () {
+    expander($(this),$('#petitions-content'));
+  });
 });

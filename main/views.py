@@ -8,15 +8,20 @@ import datetime
 from bs4 import BeautifulSoup
 from django.conf import settings
 from django.contrib.staticfiles.templatetags.staticfiles import static
+from models import Event, Consultation
+from collections import defaultdict
 
 
 
 def index(request):
+    todaydate = datetime.date.today()
+    schedule = Event.objects.order_by('date', 'house', 'location')
+    consultations = Consultation.objects.order_by('-date')
     if 'postcode' in request.session:
         postcode = request.session['postcode']
-        return render(request, 'index.html', {'postcode': postcode})
+        return render(request, 'index.html', {'postcode': postcode, 'schedule': schedule, 'todaydate': todaydate, 'consultations':consultations})
     else:
-        return render(request, 'index.html')
+        return render(request, 'index.html', {'schedule': schedule, 'todaydate': todaydate})
 
 
 def postcode(request):
@@ -91,36 +96,11 @@ def clearPostcode(request):
         clear = False
     return JsonResponse(clear, safe=False)
 
-def upcomingParliament(request):
-    schedule = []
-    today = datetime.date.today()
-    todaystr = today.strftime('the day is %d and the month is %m and the year is %Y')
-    def getEvents(url):
-        try:
-            r  = requests.get(url)
-            data = r.text
-            soup = BeautifulSoup(data, 'html.parser')
-            tds = soup.findAll('td')
-            events = []
-            for td in tds:
-                title = td.find('p', {'class': 'parl-calendar-event-title'}).getText()
-                if title:
-                    event = {}
-                    event['title'] = str(title)
-                    event['description'] = str(td.find('p', {'class': 'parl-calendar-event-description'}))
-                    event['type'] = str(td.findParents('table')[0]['data-specflow-id'])
-                    events.append(event)
-            return events
-        except:
-            pass
-    for n in range(20):
-        schedule.append({'date': today.strftime('%d/%m/%Y')})
-        year = today.strftime('%Y')
-        month = today.strftime('%m')
-        day = today.strftime('%d')
-        commons_url = 'https://calendar.parliament.uk/calendar/Commons/All/' + year + '/' + month + '/' + day + '/Daily'
-        lords_url ='https://calendar.parliament.uk/calendar/Lords/All/' + year + '/' + month + '/' + day + '/Daily'
-        schedule[n]['commons_events'] = getEvents(commons_url)
-        schedule[n]['lords_events'] = getEvents(lords_url)
-        today += datetime.timedelta(days=1)
-    return JsonResponse(schedule, safe=False)
+def petitions(request):
+    try:
+        send_url = 'http://petition.parliament.uk/petitions.json?state=all'
+        r = requests.get(send_url)
+        data = json.loads(r.text)
+    except:
+        data = {'error_message':'Connection error. Retry.'}
+    return JsonResponse(data, safe=False)

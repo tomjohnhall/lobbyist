@@ -7,5 +7,5 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^postcode/', views.postcode, name='postcode'),
     url(r'^clearPostcode/', views.clearPostcode, name='clearPostcode'),
-    url(r'^upcomingParliament/', views.upcomingParliament, name='upcomingParliament')
+    url(r'^petitions/', views.petitions, name='petitions'),
 ]

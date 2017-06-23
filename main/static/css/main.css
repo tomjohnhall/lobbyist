@@ -1,4 +1,4 @@
-#about-content, #mp-result, #postcode-error, #unconfirmed-email {
+.content, #mp-result, #postcode-error, #unconfirmed-email, .loading {
   display: none;
 }
 
@@ -55,4 +55,8 @@
 
 #clear-mp {
   margin: 10px;
+}
+
+.arrow {
+  font-size:50%;
 }

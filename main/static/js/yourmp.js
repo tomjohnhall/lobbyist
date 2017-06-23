@@ -1,10 +1,12 @@
 function getMP(postcode) {
+  $('#petitions-loading').fadeIn();
   $.ajax({
       type        : 'POST', // define the type of HTTP verb we want to use (POST for our form)
       url         : 'postcode/', // the url where we want to POST
       data        : { postcode }, // our data object
       dataType    : 'json', // what type of data do we expect back from the server
   success : function(mp) {
+    $('#petitions-loading').fadeOut();
     if (mp.error) {
       error = mp.error + '. Please try again.';
       $('#postcode-error').fadeOut(400, function() {
