@@ -39,7 +39,7 @@ class Command(BaseCommand):
                     summary = entry.find('summary')
                     summary = "".join(summary.strings)
                     url = entry.find('link')
-                    url = str(url.href)
+                    url = str(url['href'])
                     c = Consultation(gov_id = gov_id, date=date, title = title, summary = summary, url = url)
                     c.save()
                     message += "Added a consultation: %s" % title

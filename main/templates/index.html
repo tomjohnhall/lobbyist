@@ -33,19 +33,21 @@
   <nav class="navbar">
     <div class="container">
       <div class="navbar-header">
-        <span class="navbar-brand"><a href=""  href="#">Lobbyist</a><span style="font-size: 60%"> - guide your government</span></span>
+
       </div>
     </div>
   </nav>
 
   <div class="container">
-    <div class="intro">
-      <h1> Lobbyist  <span id="title-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h1>
+    <div class="intro section">
+      <h1 id="main-title"> Lobbyist  </h1>
 
-      <p id="about-content" class="content"> The 2017 UK Generel Election has left UK politics in a state of bewilderment, which means it's more important now than ever that constituents, of any and all party loyalties, are able to lobby their MPs to represent their interests in parliament. Lobbyist is a tool for collaborating on letter writing compaigns, petitions and improving the accessibility of complex acts and bills as they progress.
+      <p id="about-content"> A set of quick tools for political engagement. </p>
     </div>
-    <div class="your-mp">
-      <h2> Your MP <span id="mp-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
+
+    <div class="your-mp section">
+      <div id="mp-anchor" class="anchor"></div>
+      <h2 id="mp-title"> Your MP <span id="mp-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
       <div id="mp-content" class="content">
       <form method="POST" id="postcode-form">
         <div class="input-group">
@@ -64,7 +66,9 @@
       {% endif %}
       <div id="mp-result">
         <div class="row">
-          <div class="col-xs-5 col-sm-3">
+          <div class="col-xs-12 col-md-6 offset-md-3" id="mp-wrapper">
+          <div class="row">
+          <div class="col-xs-5" id="mp-left">
             <div id="mp-image-container" class="center-block">
               <img src="" alt="" id="mp-image" >
               <div id="mp=party">
@@ -73,7 +77,7 @@
               </div>
             </div>
           </div>
-          <div class="col-xs-7 col-sm-4">
+          <div class="col-xs-7" id="mp-right">
             <h3 id="mp-name"></h3>
             <p id="mp-constituency"></p>
             <p id="mp-position"></p>
@@ -95,34 +99,39 @@
           </div>
           </div>
         </div>
+        </div>
+        </div>
 
 
 
       </div>
     </div>
 
-    <div id="upcomingParliament">
+    <div id="upcomingParliament" class="section">
+      <div id="upcoming-anchor" class="anchor"></div>
       <h2 id="upcoming-title">Upcoming in Parliament <span id="upcoming-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
       <div id="upcoming-content" class="content">
+        {% if schedule|length == 0 %}
+          <p> No scheduled events </p>
+        {% else %}
+        <p id="recent-events" class="schedule-extender"> &uarr; Recent events... </p>
         {% for event in schedule %}
+          {% if not forloop.first %}
+            {% ifchanged event.house %}
+              </div>
+            {% endifchanged %}
+            {% ifchanged event.date %}
+              </div></div>
+            {% endifchanged %}
+          {% endif %}
           {% ifchanged event.date %}
-            {% if not forloop.first %}
-            </div></div></div>
-            {% endif %}
-            {% if event.date in date %}
-            <div class="date today">
-            {% else %}
-            <div class="date">
-            {% endif %}
-            <h2> {{ event.date }} </h2>
+            <div class="date {% if event.date < todaydate %} past {% else %} future {% endif %} ">
+            <p class="date-date"> {{ event.date }} </p>
             <div class="row">
           {% endifchanged %}
           {% ifchanged event.house event.date %}
-            {% autoescape on %}
-              {% cycle '' '</div>' %}
-            {% endautoescape %}
-            <div class="col-xs-6">
-            <h3> {{ event.house }} </h3>
+            <div class="col-xs-12 col-sm-6 schedule-house">
+            <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
           {% endifchanged %}
           {% ifchanged event.location event.house event.date %}
             <h4> {{ event.location }} </h4>
@@ -133,27 +142,34 @@
                 {{ event.description | safe }}
               {% endif %}
             {% endif %}
+
             {% if forloop.last %}
             <div></div></div>
             {% endif %}
         {% endfor %}
+
+
       </div>
       </div>
+      <p id="more-events" class="schedule-extender">&darr; More...</p>
+      {% endif %}
       </div>
     </div>
 
-    <div id="consultations">
+    <div id="consultations" class="section">
+      <div id="consultations-anchor" class="anchor"></div>
       <h2 id="consultations-title">Public Consultations <span id="consultations-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
         <div id="consultations-content" class="content">
-          {% for c in consultations %}
-          <a href="{{ c.url }}"><h3> {{ c.title }} </h3> </a>
+        {% for c in consultations %}
+          <a target="_blank" href="{{ c.url }}"><h3> {{ c.title }} </h3> </a>
           <p> {{ c.date|date:'d-m-Y H:i' }} </p>
           <p> {{ c.summary }} </p>
         {% endfor %}
       </div>
     </div>
 
-    <div id="petitions">
+    <div id="petitions" class="section">
+      <div id="petitions-anchor" class="anchor"></div>
       <h2 id="petitions-title">Petitions <span id="petitions-arrow" class="glyphicon glyphicon-chevron-down arrow"></span></h2>
       <div id="petitions-content" class="content">
         <i id="petitions-loading" class="fa fa-cog fa-spin fa-md fa-fw"></i>

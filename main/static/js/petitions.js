@@ -7,9 +7,11 @@ jQuery.ajax({
     success: function(data) {
       data = data.data
       if (!data.length>0) {
-        $none = $('<p>')
+        if ($('.no-petitions').length == 0){
+        $none = $('<p>', {'class': 'no-petitions'})
         $none.text('There are no open petitions right now.')
         $('#petitions-content').append($none);
+        }
       }
       else {
       for (i=0; i < data.length ; i++) {
@@ -38,7 +40,7 @@ $('#petitions-loading').fadeOut();
 }
 
 $(document).ready(function () {
-  $('#petitions-arrow').click(function() {
+  $('#petitions-title').click(function() {
     petitions();
   });
 });

@@ -44,9 +44,10 @@ class Command(BaseCommand):
                         event = Event(date=date, location=location, house=house, title=title, description=description)
                         if Event.objects.filter(date=date, title=title, house=house).exists():
                             dupes += 1
-                            message = 'duplicates %s' % dupes
+                            message += 'duplicates %s' % str(dupes)
                         else:
                             event.save()
+                            message += 'added event: %s' % title
                     else:
                         message += 'no events. '
         for n in range(10):

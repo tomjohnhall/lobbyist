@@ -21,7 +21,7 @@ def index(request):
         postcode = request.session['postcode']
         return render(request, 'index.html', {'postcode': postcode, 'schedule': schedule, 'todaydate': todaydate, 'consultations':consultations})
     else:
-        return render(request, 'index.html', {'schedule': schedule, 'todaydate': todaydate})
+        return render(request, 'index.html', {'schedule': schedule, 'todaydate': todaydate, 'consultations': consultations})
 
 
 def postcode(request):

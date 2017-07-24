@@ -6,7 +6,7 @@ function getMP(postcode) {
       data        : { postcode }, // our data object
       dataType    : 'json', // what type of data do we expect back from the server
   success : function(mp) {
-    $('#petitions-loading').fadeOut();
+    $()
     if (mp.error) {
       error = mp.error + '. Please try again.';
       $('#postcode-error').fadeOut(400, function() {

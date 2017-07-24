@@ -25,7 +25,7 @@ SECRET_KEY = 'mwt7mea14j=t&ux%me9e$a=1*$iiwdjosecc#g3eq6sp3mzpo+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost:8000', 'herokuapp.com', 'salty-hamlet-46189.herokuapp.com', 'lobbyist.org.uk']
+ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost', 'herokuapp.com', 'salty-hamlet-46189.herokuapp.com', 'lobbyist.org.uk']
 
 
 # Application definition
