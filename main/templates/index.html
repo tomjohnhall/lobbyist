@@ -1,13 +1,13 @@
 {% load static %}
+{% load bootstrap3 %}
 <html>
 <head>
-
+  {% bootstrap_css %}
+  {% bootstrap_javascript %}
   <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.css' %}">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.css' %}">
 <!-- Optional theme -->
-<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
 <!-- Social glyphs -->
 <link rel="stylesheet" href="{% static 'bootstrap-social-gh-pages/bootstrap-social.css' %}">
 <!-- Main css -->
