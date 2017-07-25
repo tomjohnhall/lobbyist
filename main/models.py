@@ -8,16 +8,16 @@ class Event(models.Model):
     date = models.DateField(blank=True, null=True)
     house = models.CharField(max_length=255)
     location = models.CharField(max_length=255)
-    title = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    title = models.TextField(blank=True)
+    description = models.TextField(blank=True)
     def __unicode__(self):
         return unicode(self.title)
 
 class Consultation(models.Model):
-    gov_id = models.CharField(max_length=20)
+    gov_id = models.CharField(max_length=50)
     date = models.DateTimeField(blank=True, null=True)
-    title = models.CharField(max_length = 255)
-    summary = models.CharField(max_length = 255)
+    title = models.TextField(blank=True)
+    summary = models.TextField(blank=True)
     url = models.CharField(max_length = 255)
     def __unicode__(self):
         return self.title
