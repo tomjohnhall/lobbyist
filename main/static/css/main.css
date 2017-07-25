@@ -13,12 +13,13 @@
 #mp-image-container {
   width: 150px;
   height: 200px;
-
+  max-width: 100%;
   margin-bottom: 20px;
 }
 
 #mp-image {
   width: 150px;
+  max-width: 100%;
   margin-bottom: 5px;
 }
 
