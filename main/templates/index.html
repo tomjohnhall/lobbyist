@@ -116,11 +116,11 @@
         <p id="recent-events" class="schedule-extender"> &uarr; Recent events... </p>
         {% for event in schedule %}
           {% if not forloop.first %}
-            {% ifchanged event.house event.date %}
+            {% ifchanged event.house %}
               </div>
             {% endifchanged %}
             {% ifchanged event.date %}
-              </div></div>
+            </div></div></div>
             {% endifchanged %}
           {% endif %}
           {% ifchanged event.date %}
@@ -143,7 +143,7 @@
             {% endif %}
 
             {% if forloop.last %}
-            <div></div></div>
+            </div></div></div>
             {% endif %}
         {% endfor %}
 
