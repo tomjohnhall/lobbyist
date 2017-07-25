@@ -14,7 +14,7 @@ class Event(models.Model):
         return unicode(self.title)
 
 class Consultation(models.Model):
-    gov_id = models.CharField(max_length=50)
+    gov_id = models.CharField(max_length=255)
     date = models.DateTimeField(blank=True, null=True)
     title = models.TextField(blank=True)
     summary = models.TextField(blank=True)
