@@ -118,10 +118,10 @@
           {% if not forloop.first %}
             {% ifchanged event.house %}
               </div>
-            {% endifchanged %}
             {% else %}
-            {% ifchanged event.date %}
-            </div></div></div>
+              {% ifchanged event.date %}
+              </div></div></div>
+              {% endifchanged %}
             {% endifchanged %}
           {% endif %}
           {% ifchanged event.date %}
