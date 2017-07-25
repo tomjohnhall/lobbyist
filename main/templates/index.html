@@ -116,7 +116,7 @@
         <p id="recent-events" class="schedule-extender"> &uarr; Recent events... </p>
         {% for event in schedule %}
           {% if not forloop.first %}
-            {% ifchanged event.house %}
+            {% ifchanged event.house event.date %}
               </div>
             {% endifchanged %}
             {% ifchanged event.date %}
@@ -136,9 +136,9 @@
             <h4> {{ event.location }} </h4>
           {% endifchanged %}
             {% if 'Adjournment' not in event.title %}
-              {{ event.title | safe }}
+              <p>{{ event.title | safe }}</p>
               {% if event.description != 'None' %}
-                {{ event.description | safe }}
+                <p>{{ event.description | safe }}</p>
               {% endif %}
             {% endif %}
 
