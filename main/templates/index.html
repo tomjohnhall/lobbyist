@@ -126,6 +126,7 @@
               <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
           {% else %}
             {% ifchanged event.house %}
+              <p> The house just changed </p>
               </div>
               <div class="col-xs-12 col-sm-6 schedule-house">
               <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
