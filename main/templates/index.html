@@ -115,30 +115,30 @@
         {% else %}
         <p id="recent-events" class="schedule-extender"> &uarr; Recent events... </p>
         {% for event in schedule %}
-          {% ifchanged event.date %}
+          {% ifchanged event.house event.date %}
             {% if not forloop.first %}
-            </div></div></div>
+            </div>
+            {% endif %}
+            {% ifchanged event.date %}
+            {% if not forloop.first %}
+            </div></div>
             {% endif %}
             <div class="date {% if event.date < todaydate %} past {% else %} future {% endif %} ">
             <p class="date-date"> {{ event.date }} </p>
             <div class="row">
-              <div class="col-xs-12 col-sm-6 schedule-house">
-              <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
-          {% else %}
-            {% ifchanged event.house %}
-              <p> The house just changed </p>
-              </div>
-              <div class="col-xs-12 col-sm-6 schedule-house">
-              <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
             {% endifchanged %}
+              <div class="col-xs-12 col-sm-6 schedule-house">
+              <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
           {% endifchanged %}
+          {% ifchanged event.location event.house event.date %}
               <h4> {{ event.location }} </h4>
-                {% if 'Adjournment' not in event.title %}
-                  <p>{{ event.title | safe }}</p>
-                  {% if event.description != 'None' %}
-                    <p>{{ event.description | safe }}</p>
-                  {% endif %}
+          {% endifchanged %}
+              {% if 'Adjournment' not in event.title %}
+                <p>{{ event.title | safe }}</p>
+                {% if event.description != 'None' %}
+                  <p>{{ event.description | safe }}</p>
                 {% endif %}
+              {% endif %}
               {% if forloop.last %}
               </div></div></div>
               {% endif %}

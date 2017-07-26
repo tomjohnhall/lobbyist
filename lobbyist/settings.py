@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', '127.0.0.1:8000', 'localhost', 'herokuapp.com', 'example.herokuapp.com', 'salty-hamlet-46189.herokuapp.com', 'lobbyist.org.uk']
 
@@ -85,7 +85,7 @@ DATABASES = {
 }
 
 import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=500)
+db_from_env = dj_database_url.config(default='postgres://wrztyfagnscxiv:9dcc4c534cb6f8963854181102b20ebaaa0b9412ff23303f954efa4017cf33c3@ec2-184-72-230-93.compute-1.amazonaws.com:5432/da1hdkkjevl8kh')
 DATABASES['default'].update(db_from_env)
 
 

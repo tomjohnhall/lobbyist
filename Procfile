@@ -1,1 +1,1 @@
-web: gunicorn lobbyist.wsgi --log-file -
+web: python manage.py runserver
