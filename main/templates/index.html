@@ -115,46 +115,32 @@
         {% else %}
         <p id="recent-events" class="schedule-extender"> &uarr; Recent events... </p>
         {% for event in schedule %}
-          {% if not forloop.first %}
-            <p> not the first event </p>
-            {% ifchanged event.house %}
-          </p> the house has changed </p>
-              </div>
-              {% ifchanged event.date %}
-              </p> the house and date have changed </p>
-              </div></div>
-              {% endifchanged %}
-            {% else %}
-              {% ifchanged event.date %}
-              <p> same house different date </p>
-              </div></div></div>
-              {% endifchanged %}
-            <p> nothing's changed </p>
-            {% endifchanged %}
-          {% endif %}
           {% ifchanged event.date %}
+            {% if not forloop.first %}
+            </div></div></div>
+            {% endif %}
             <div class="date {% if event.date < todaydate %} past {% else %} future {% endif %} ">
             <p class="date-date"> {{ event.date }} </p>
             <div class="row">
+              <div class="col-xs-12 col-sm-6 schedule-house">
+              <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
+          {% else %}
+            {% ifchanged event.house %}
+              </div>
+              <div class="col-xs-12 col-sm-6 schedule-house">
+              <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
+            {% endifchanged %}
           {% endifchanged %}
-          {% ifchanged event.house event.date %}
-            <div class="col-xs-12 col-sm-6 schedule-house">
-            <a target="_blank" href="http://calendar.parliament.uk/calendar/{% if 'Lords' in event.house %}Lords{% else %}Commons{% endif %}/All/{{ event.date|date:"Y" }}/{{ event.date|date:"n" }}/{{ event.date|date:"j" }}/Daily"><h3> {{ event.house }} </h3></a>
-          {% endifchanged %}
-          {% ifchanged event.location event.house event.date %}
-            <h4> {{ event.location }} </h4>
-          {% endifchanged %}
-            {% if 'Adjournment' not in event.title %}
-              <p>{{ event.title | safe }}</p>
-              {% if event.description != 'None' %}
-                <p>{{ event.description | safe }}</p>
+              <h4> {{ event.location }} </h4>
+                {% if 'Adjournment' not in event.title %}
+                  <p>{{ event.title | safe }}</p>
+                  {% if event.description != 'None' %}
+                    <p>{{ event.description | safe }}</p>
+                  {% endif %}
+                {% endif %}
+              {% if forloop.last %}
+              </div></div></div>
               {% endif %}
-            {% endif %}
-
-          {% if forloop.last %}
-          <p> last of the loop </p>
-          </div></div></div>
-          {% endif %}
         {% endfor %}
 
 
