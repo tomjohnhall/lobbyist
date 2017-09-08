@@ -123,3 +123,8 @@
 .schedule-house:first-child {
   border-right: 1px solid #989595;
 }
+
+.schedule-house:nth-child(2) {
+  border-left: 1px solid #989595;
+  margin-left: -1px;
+}
