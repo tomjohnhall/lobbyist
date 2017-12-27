@@ -11,6 +11,11 @@ function expander(arrow,content) {
 
 $(document).ready(function() {
 
+  if($('.future').length == 0) {
+    $('.date:nth-of-type(-n+3)').addClass('importance');
+    $('#recent-events').hide();
+  }
+
   $('#mp-title').click(function () {
     expander($('#mp-arrow'),$('#mp-content'));
   });

@@ -82,6 +82,10 @@
   display: none;
 }
 
+.importance {
+  display: block!important;
+}
+
 #main-title, #about-content {
   text-align: right;
 }
