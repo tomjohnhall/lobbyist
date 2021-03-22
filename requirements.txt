@@ -22,7 +22,7 @@ Flask==1.0
 gunicorn==19.7.1
 itsdangerous==0.24
 Jinja2==2.9.4
-lxml==3.4.0
+lxml==4.6.3
 MarkupSafe==0.23
 olefile==0.44
 phonenumberslite==8.5.2
