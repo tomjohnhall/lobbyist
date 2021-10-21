@@ -1,5 +1,5 @@
 ﻿approx-dates==0.0.1
-Babel==2.4.0
+Babel==2.9.1
 BeautifulSoup==3.2.1
 beautifulsoup4==4.3.2
 click==6.7
